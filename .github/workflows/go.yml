@@ -27,9 +27,9 @@ jobs:
     - name: Install dependencies
       run: |
         cd ./resource-cel-validator
-        go get .
+        go get ./...
         cd ../tests
-        go get -t .
+        go get -t ./...
 
     - name: Build
       run: | 
