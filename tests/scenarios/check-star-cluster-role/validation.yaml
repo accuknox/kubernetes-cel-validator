@@ -1,0 +1,13 @@
+name: star-cluster-role-precondition
+matchResources:
+  resourceRules:
+    - Group: rbac.authorization.k8s.io
+      Version: v1
+      Resource: clusterroles
+  selectionPreconditions:
+    - expression: "object.metadata.name == 'superuser'"
+      messageExpression: "'resource: ' + object.metadata.name + ' is not a superuser'"
+validations:
+  - expression: "object.rules.exists(rule, '*' in rule.resources)"
+    key: "star-cluster-role"
+    messageExpression: "object.metadata.name + ' does not have access to all resources'"

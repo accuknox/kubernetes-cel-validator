@@ -1,0 +1,32 @@
+name: replicas-precondition
+matchResources:
+  namespaceSelector:
+    matchExpressions:
+      - key: hoo
+        operator: DoesNotExist
+    matchLabels:
+      kubernetes.io/metadata.name: validation-test-ns
+  objectSelector:
+    matchExpressions:
+      - key: hoo
+        operator: DoesNotExist
+    matchLabels:
+      app: nginx
+  resourceRules:
+    - Group: apps
+      Version: v1
+      Resource: deployments
+  selectionPreconditions:
+    - key: "nginx-name"
+      messageExpression: "'resource: ' + object.metadata.name + ' is not nginx'"
+      expression: "object.metadata.name == 'nginx'"
+    - key: "nginx-label"
+      messageExpression: "'resource: ' + object.metadata.name + ' does not have nginx label, it has ' + object.spec.template.metadata.labels.app"
+      expression: "object.spec.template.metadata.labels.app == 'nginx'"
+validations:
+  - expression: "object.spec.replicas == 1"
+    key: "single-replica"
+    messageExpression: "'resource: ' + object.metadata.name + ' does not have 1 replica, it has ' + string(object.spec.replicas)"
+  - expression: "object.spec.template.spec.containers[0].image == 'nginx'"
+    key: "nginx-image"
+    messageExpression: "'resource: ' + object.metadata.name + ' does not have nginx image, it has ' + object.spec.template.spec.containers[0].image + ' image instead'"

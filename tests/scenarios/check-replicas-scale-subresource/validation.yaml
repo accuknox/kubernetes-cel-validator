@@ -1,0 +1,25 @@
+name: replicas-precondition
+matchResources:
+  namespaceSelector:
+    matchExpressions:
+      - key: hoo
+        operator: DoesNotExist
+    matchLabels:
+      kubernetes.io/metadata.name: validation-test-ns
+  objectSelector:
+    matchExpressions:
+      - key: hoo
+        operator: DoesNotExist
+    matchLabels:
+      app: nginx
+  resourceRules:
+    - Group: apps
+      Version: v1
+      Resource: deployments/scale
+  selectionPreconditions:
+    - expression: "object.metadata.name == 'nginx'"
+      key: "nginx-name"
+      messageExpression: "'resource: ' + object.metadata.name + ' is not nginx'"
+validations:
+  - expression: "object.status.replicas == 1"
+    key: "single-replica"
