@@ -20,7 +20,10 @@ jobs:
       uses: actions/setup-go@v4
       with:
         go-version: ${{ matrix.go-version }}
-        
+        check-latest: true
+        cache: true
+        cache-dependency-path: '**/go.sum'
+
     - name: Display Go version
       run: go version
       
