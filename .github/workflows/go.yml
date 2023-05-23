@@ -34,12 +34,13 @@ jobs:
         cd ../tests
         go get -t ./...
 
-    - name: Build
+    - name: Build & Test
       run: | 
         cd ./resource-cel-validator
         go build -v ./...
+        go test -v ./...
 
-    - name: Test
+    - name: e2e Tests
       run: | 
         cd ./tests
         go test -v ./...
