@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a simple tool to validate Kubernetes cluster resources against a set of rules defined using the [CEL](https://github.com/google/cel-spec) language.
+This is a library to validate Kubernetes cluster resources against a set of rules defined using the [CEL](https://github.com/google/cel-spec) language.
 
 The CEL used uses both [CEL community libraries](https://kubernetes.io/docs/reference/using-api/cel/#cel-community-libraries) and [Kubernetes CEL libraries](https://kubernetes.io/docs/reference/using-api/cel/#kubernetes-cel-libraries).
 
