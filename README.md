@@ -8,6 +8,8 @@ The CEL used uses both [CEL community libraries](https://kubernetes.io/docs/refe
 
 Please read the CEL Introduction at https://kubernetes.io/docs/reference/using-api/cel/ to know about working with CEL.
 
+[![Go Build and Test](https://github.com/accuknox/kubernetes-cel-validator/actions/workflows/go.yml/badge.svg)](https://github.com/accuknox/kubernetes-cel-validator/actions/workflows/go.yml)
+
 ## Usage
 
 This is a library that can be used in your own Go code. You can use it in your own code by importing it:
